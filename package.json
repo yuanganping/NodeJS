@@ -1,0 +1,23 @@
+{
+  "name": "NodeJS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "check2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tracyc3/NodeJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tracyc3/NodeJS/issues"
+  },
+  "homepage": "https://github.com/Tracyc3/NodeJS#readme",
+  "dependencies": {
+    "request-promise": "^4.2.6"
+  }
+}

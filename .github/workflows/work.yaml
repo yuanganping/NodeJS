@@ -1,0 +1,47 @@
+name: Daily_Info
+
+on:
+  push: # push触发
+    branches: [main]
+  workflow_dispath: # 手动触发
+  schedule: # 定时任务触发
+    - cron: "30 0 * * *" # cron表达式，Actions时区是UTC时间，所以要往前推8个小时,如上表示每天14点10分
+# 环境变量，secrets里的变量
+env:
+  PUSH_KEY: ${{ secrets.PUSH_KEY }}
+  UPLOAD_BESULT_DIR: true
+
+jobs:
+  run-daily-info-tool:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出
+      - name: Checkout codes
+        uses: actions/checkout@v2
+
+      # 设置服务器时间为东八区
+      - name: Set timezone
+        run: sudo timedatectl set-timezone 'Asia/Shanghai'
+
+      # 设置Node环境
+      - name: Use NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      # 安装依赖
+      - name: Run Install
+        run: npm install
+
+      # 运行脚本
+      - name: Run script
+        run: node daily-info.js
+
+      # 获取结果
+      - name: Upload result file
+        uses: actions/upload-artifact@master
+        if: env.UPLOAD_BESULT_DIR == 'true'
+        with:
+          name: result
+          path: ./*.txt
