@@ -22,6 +22,8 @@ async function sendNotification() {
   console.log("消息发送完毕： ", result.errno);
 }
 
-function main() {}
+function main() {
+  sendNotification();
+}
 
 main();
